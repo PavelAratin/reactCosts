@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CostForm.css';
+import ButtonCancel from './CostFormButtonCancel';
 
 const CostForm = (props) => {
   const [inputName, setInputName] = useState('');
@@ -70,6 +71,7 @@ const CostForm = (props) => {
         </div>
         <div className='new-cost__actions'>
           <button type='submit'>Добавить расход</button>
+          <ButtonCancel onCancel={props.onCancel}></ButtonCancel>
         </div>
       </div>
     </form>

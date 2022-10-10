@@ -1,23 +1,31 @@
+import React, { useState } from 'react';
+import AddNewCost from '../Costs/AddNewCost';
 import CostForm from './CostForm';
 import './NewCost.css';
-//props пришел из родительского компонента (там была функция)
 const NewCost = (props) => {
-  //передача параметров из дочернего компонента родительскому
-  //функция saveCostdataHandler передана через props  в дочерний компонент, там она вызывыется с параметром нового обьекта
-  // inputCostData принятый обьект из дочернего компонента
+  const [displayForm, setDisplayForm] = useState(false)
   const saveCostdataHandler = (inputCostData) => {
     const costData = {
-      ...inputCostData,//переданный обьект в дочрнем компоненте
-      id:Math.random().toString()//добвляем новый парметр в полученный обьект
+      ...inputCostData,
+      id: Math.random().toString()
     }
-    //вызов функции из родительского компонента, параметром передаем сформированный обьект
     props.onAddCost(costData);
+    setDisplayForm(false)
+  }
+  const displayFormHandler = () => {
+    setDisplayForm(true)
+  }
+  const hiddenFormHandler = () => {
+    setDisplayForm(false)
   }
   return (
     <div className='new-cost'>
-      <CostForm onSaveCostData={saveCostdataHandler}></CostForm>
+      {displayForm
+        ? <CostForm onSaveCostData={saveCostdataHandler} onCancel={hiddenFormHandler}></CostForm>
+        : <AddNewCost onDisplayForm={displayFormHandler}></AddNewCost>
+      }
     </div>
-  );
+  )
 }
 
 export default NewCost;

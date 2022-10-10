@@ -15,7 +15,7 @@ const CostList = (props) => {
           description={cost.description}
           amount={cost.amount}
         >
-        </CostItem>))};
+        </CostItem>))}
     </ul>
   )
 
